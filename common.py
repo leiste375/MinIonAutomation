@@ -3,13 +3,18 @@ import time
 from sys import exit
 
 def directory_scan(input_dir):
-    running_file_list = []
+    running_set = set()
 
     while path.exists(input_dir):
-        current_file_list = listdir()
+        time.sleep(1)
+        current_set = frozenset(listdir())
         #Unit in seconds
-        time.sleep(5)
-        for i in current_file_list:
-            print(f'Found a new file: {i}')
+        for i in current_set:
+            if i not in current_set.intersection(running_set):
+                print(f'Found new file: {i}')
+                running_set.add(i)
+            else:
+                #print(f'Item {i} already found')
+                pass
     else:
         exit("Input directory does not exist.")
